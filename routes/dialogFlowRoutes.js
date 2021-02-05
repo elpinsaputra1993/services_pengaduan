@@ -21,9 +21,9 @@ module.exports = (app) => {
             req.body.text,
             req.body.identifier,
             req.body.messageIdentifier,
-            langCode,
-            req.body.command,
-            req.body.parameters
+            langCode
+            // req.body.command,
+            // req.body.parameters
           );
           res.send(responses[0].queryResult);
         }
@@ -39,9 +39,9 @@ module.exports = (app) => {
         req.body.event,
         req.body.identifier,
         req.body.messageIdentifier,
-        req.body.languageCode,
-        req.body.command,
-        req.body.parameters
+        req.body.languageCode
+        // req.body.command,
+        // req.body.parameters
       );
       res.send(responses[0].queryResult);
     } catch (err) {

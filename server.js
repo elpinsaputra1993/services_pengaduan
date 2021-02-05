@@ -33,5 +33,5 @@ if (process.env.NODE_ENV === "production") {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, function () {
-  console.log("Server seldii is running on Port: " + PORT);
+  console.log("Server Semangat 21 is running on Port: " + PORT);
 });

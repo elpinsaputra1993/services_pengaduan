@@ -58,7 +58,7 @@ module.exports = {
     console.log(`messageIdentifier >> ${messageIdentifier}`);
     console.log(`langCode >> ${langCode}`);
     // console.log(`command >> ${command}`);
-    responses = self.handleAction(responses, identifier, messageIdentifier);
+    self.handleAction(responses, identifier, messageIdentifier);
     return responses;
   },
   eventQuery: async function (
