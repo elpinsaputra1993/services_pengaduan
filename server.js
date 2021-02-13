@@ -3,12 +3,21 @@ const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
 const config = require("./config/keys");
+const cors = require("cors");
 
 app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+app.use(cors());
+app.use("/public", express.static("public"));
 
 require("./routes/dialogFlowRoutes")(app);
 
 require("./routes/sessionRoute")(app);
+require("./routes/prosesData")(app);
 
 //DB Config
 const db = config.mongoURI;

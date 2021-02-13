@@ -40,7 +40,7 @@ module.exports = {
       queryInput: {
         text: {
           text: text,
-          languageCode: langCode,
+          languageCode: config.dialogFlowSessionLanguageCode,
         },
       },
       queryParams: {
@@ -80,7 +80,7 @@ module.exports = {
           name: event,
           parameters: structjson.jsonToStructProto(parameters), //Dialogflow's v2 API uses gRPC.
           // a jsonToStructProto method to convert the  JS object to a proto struct.
-          languageCode: languageCode,
+          languageCode: config.dialogFlowSessionLanguageCode,
         },
       },
     };
