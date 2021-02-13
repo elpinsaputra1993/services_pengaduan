@@ -129,6 +129,19 @@ module.exports = (app) => {
 
     // User.find({ _id: mongoose.ObjectId(id) });
   });
+  app.get("/data_pelapor/:idx", async (req, res, next) => {
+    var id = req.params.idx;
+
+    let dataHasil = await User.findById(id);
+    res.status(201).json({
+      status: "success",
+      dataLength: dataHasil.length,
+      timestamp: req.requestTime,
+      data: dataHasil,
+    });
+
+    // User.find({ _id: mongoose.ObjectId(id) });
+  });
 
   app.get("/api/tindaklanjut", async (req, res) => {
     let dataHasil = await Proses.find();
