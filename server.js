@@ -24,7 +24,11 @@ const db = config.mongoURI;
 
 //Connect to Mongo
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 

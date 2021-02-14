@@ -133,11 +133,22 @@ module.exports = (app) => {
     var id = req.params.idx;
 
     let dataHasil = await User.findById(id);
+    console.log(dataHasil);
+    console.log(dataHasil._id);
+    let status = await Proses.find({ id_pelapor: dataHasil._id })
+      .sort({ _id: -1 })
+      .limit(1);
+    console.log(status[0]);
+    console.log(status[0].status);
+    dataHasil["tindaklanjut"] = status[0];
+    Object.assign(dataHasil, { tindaklanjut: status[0] });
+    console.log(dataHasil);
     res.status(201).json({
       status: "success",
       dataLength: dataHasil.length,
       timestamp: req.requestTime,
       data: dataHasil,
+      data_tindaklanjut: status[0],
     });
 
     // User.find({ _id: mongoose.ObjectId(id) });
@@ -151,5 +162,55 @@ module.exports = (app) => {
       timestamp: req.requestTime,
       data: dataHasil,
     });
+  });
+
+  app.patch("/data_pelapor/api/update_status/:_id", async (req, res) => {
+    let test = {
+      params: req.params,
+      body: req.body,
+    };
+    console.log(test);
+    // res.send(test);
+
+    await Proses.findByIdAndUpdate(
+      req.params._id,
+      req.body,
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+          res.status(400).json(err);
+        } else {
+          console.log("Updated Status : ", docs);
+          res.status(200).json(docs);
+        }
+      }
+    );
+  });
+
+  app.get("/data_pelapor/api/update_status/:idx", async (req, res) => {
+    var id = req.params.idx;
+
+    let dataHasil = await Proses.find();
+    res.status(201).json({
+      status: "success",
+      dataLength: dataHasil.length,
+      timestamp: req.requestTime,
+      data: dataHasil,
+      request: req.params,
+    });
+
+    // await Proses.findByIdAndUpdate(
+    //   req.params.id,
+    //   req.body,
+    //   function (err, docs) {
+    //     if (err) {
+    //       console.log(err);
+    //       res.status(400).json(err);
+    //     } else {
+    //       console.log("Updated Status : ", docs);
+    //       res.status(200).json(docs);
+    //     }
+    //   }
+    // );
   });
 };
