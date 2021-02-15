@@ -52,10 +52,11 @@ module.exports = (app) => {
       const user = new User({
         _id: new mongoose.Types.ObjectId(),
         imgCollection: reqFiles,
-        name: req.body.fname,
+        name: req.body.name,
         phone: req.body.notelp,
         email: req.body.email,
         topic: req.body.topik,
+        location: req.body.location,
         info: req.body.info,
       });
 
@@ -107,7 +108,7 @@ module.exports = (app) => {
   // MySchema.find().sort({ createdAt: -1 }).limit(10); // latest docs
 
   app.get("/api/pelapor", async (req, res) => {
-    let dataHasil = await User.find();
+    let dataHasil = await User.find().sort({ _id: -1 });
     res.status(201).json({
       status: "success",
       dataLength: dataHasil.length,
@@ -155,7 +156,7 @@ module.exports = (app) => {
   });
 
   app.get("/api/tindaklanjut", async (req, res) => {
-    let dataHasil = await Proses.find();
+    let dataHasil = await Proses.find().sort({ _id: -1 });
     res.status(201).json({
       status: "success",
       dataLength: dataHasil.length,

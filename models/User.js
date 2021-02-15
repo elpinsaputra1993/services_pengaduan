@@ -10,6 +10,7 @@ const userSchema = new Schema({
   phone: { type: String },
   email: { type: String },
   topic: { type: String },
+  location: { type: String },
   info: { type: String },
   // datetime: { type: Date, default: Date.now() },
   datetime: { type: Date, default: new Date() },
